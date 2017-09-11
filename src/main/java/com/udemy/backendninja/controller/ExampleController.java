@@ -1,6 +1,10 @@
 package com.udemy.backendninja.controller;
 
+import com.udemy.backendninja.component.ExampleComponent;
 import com.udemy.backendninja.model.Person;
+import com.udemy.backendninja.service.ExampleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +18,20 @@ import java.util.List;
 @RequestMapping("/example")
 public class ExampleController {
     public static  final String EXAMPLE_VIEW = "example";
+
+    @Autowired
+    @Qualifier("exampleService")
+    private ExampleService exampleService;
+
+    @Autowired
+    @Qualifier("exampleComponent")
+    private ExampleComponent exampleComponent;
+
     //First shape
     @GetMapping(value = "/exampleString")
     public String exampleString(Model model){
-        model.addAttribute("people", getPeople());
+        exampleComponent.sayHello();
+        model.addAttribute("people", exampleService.getListPeople());
         return EXAMPLE_VIEW;
     }
 
@@ -25,17 +39,7 @@ public class ExampleController {
     @GetMapping(value = "/exampleMAV")
     public ModelAndView exampleMAV(){
         ModelAndView mav = new ModelAndView(EXAMPLE_VIEW);
-        mav.addObject("people",getPeople());
+        mav.addObject("people",exampleService.getListPeople());
         return mav;
-    }
-
-    private List<Person> getPeople() {
-        List<Person> people = new ArrayList<>();
-        people.add(new Person("Pepe", 25));
-        people.add(new Person("Tony", 20));
-        people.add(new Person("Nia", 3));
-        people.add(new Person("Bob", 21));
-
-        return people;
     }
 }
