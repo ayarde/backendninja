@@ -1,33 +1,17 @@
-package com.udemy.backendninja.entity;
+package com.udemy.backendninja.model;
 
-import javax.persistence.*;
+public class CourseModel {
 
-@Entity
-@Table(name="course")
-public class Course {
+   private int id;
+   private String name;
+   private String description;
+   private int price;
+   private int hours;
 
-    @Id
-    @GeneratedValue
-    @Column(name="id")
-    private int id;
-
-    @Column(name="name")
-    private String name;
-
-    @Column(name="description")
-    private String description;
-
-    @Column(name="price")
-    private int price;
-
-    @Column(name="hours")
-    private int hours;
-
-    public  Course(){
-
+    public CourseModel() {
     }
 
-    public Course(int id, String name, String description, int price, int hours) {
+    public CourseModel(int id, String name, String description, int price, int hours) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -73,16 +57,5 @@ public class Course {
 
     public void setHours(int hours) {
         this.hours = hours;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", hours=" + hours +
-                '}';
     }
 }
