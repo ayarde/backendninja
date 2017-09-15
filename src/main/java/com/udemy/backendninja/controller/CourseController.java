@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CourseController {
 
     private static final String COURSE_VIEW = "courses";
+    private static final String COURSE_EDIT_VIEW = "edit";
 
     private static final Log LOGGER = LogFactory.getLog(CourseController.class);
 
@@ -45,8 +46,20 @@ public class CourseController {
         return "redirect:/courses/listcourses";
     }
 
+    @PostMapping("/editcourse")
+    public ModelAndView editCourse(@ModelAttribute("course") Course course){
+        LOGGER.info("Call: " + "editcourse" + " -- Param: " + course.toString());
+        ModelAndView modelAndView = new ModelAndView(COURSE_EDIT_VIEW);
+        modelAndView.addObject("id",course.getId());
+        modelAndView.addObject("name",course.getName());
+        modelAndView.addObject("description",course.getDescription());
+        modelAndView.addObject("price",course.getPrice());
+        modelAndView.addObject("hours",course.getHours());
+        return modelAndView;
+    }
+
     @PostMapping("/updatecourse")
-    public String updateCourse(Course course){
+    public String updateCourse(@ModelAttribute("course") Course course) {
         LOGGER.info("Call: " + "updateCourse()" + " -- Param: " + course.toString());
         courseService.updateCourse(course);
         return "redirect:/courses/listcourses";

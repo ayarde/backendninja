@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Course</title>
+</head>
+<body>
+<body>
+<form action="#" th:action="@{/courses/updatecourse}" th:object="${course}" method="post">
+    <p>ID: <input type="text" th:value="${course.id}" th:field="*{id}"/></p>
+    <p>Name: <input type="text" th:value="${course.name}" th:field="*{name}"/></p>
+    <p>Description: <input type="text" th:value="${course.description}" th:field="*{description}"/></p>
+    <p>Price: <input type="number" th:value="${course.price}" th:field="*{price}"/></p>
+    <p>Hours: <input type="number" th:value="${course.hours}" th:field="*{hours}"/></p>
+    <p><input type="submit" value="Submit"/></p>
+</form>
+</body>
+</body>
+</html>
