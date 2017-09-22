@@ -22,7 +22,7 @@
                 <th><span th:text="${course.description}">Description</span></th>
                 <th><span th:text="${course.price}">Price</span></th>
                 <th><span th:text="${course.hours}">Hours</span></th>
-                <td><a th:href="@{/courses/editcourse/${course}}">Edit</a></td>
+                <td><a th:href="@{/courses/editcourse/{course}(course=${course})}">Edit</a></td>
                 <td><a th:href="@{/courses/removecourse/{id}(id=${course.id})}">Delete</a></td>
             </tr>
         </tbody>

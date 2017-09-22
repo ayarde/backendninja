@@ -1,6 +1,8 @@
 package com.udemy.backendninja.controller;
 
+import com.udemy.backendninja.converter.CourseConverter;
 import com.udemy.backendninja.entity.Course;
+import com.udemy.backendninja.model.CourseModel;
 import com.udemy.backendninja.service.CourseService;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
@@ -46,8 +48,8 @@ public class CourseController {
         return "redirect:/courses/listcourses";
     }
 
-    @PostMapping("/editcourse")
-    public ModelAndView editCourse(@ModelAttribute("course") Course course){
+    @GetMapping("/editcourse/{course}")
+    public ModelAndView editCourse(@PathVariable("course") Course course){
         LOGGER.info("Call: " + "editcourse" + " -- Param: " + course.toString());
         ModelAndView modelAndView = new ModelAndView(COURSE_EDIT_VIEW);
         modelAndView.addObject("id",course.getId());
@@ -59,9 +61,11 @@ public class CourseController {
     }
 
     @PostMapping("/updatecourse")
-    public String updateCourse(@ModelAttribute("course") Course course) {
+    public String updateCourse(@ModelAttribute("course") CourseModel course) {
         LOGGER.info("Call: " + "updateCourse()" + " -- Param: " + course.toString());
-        courseService.updateCourse(course);
+        CourseConverter courseConverter = new CourseConverter();
+
+        courseService.updateCourse(courseConverter.modelEntity(course));
         return "redirect:/courses/listcourses";
     }
 
