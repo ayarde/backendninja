@@ -22,6 +22,7 @@ public class CourseConverter {
     public Course modelEntity(CourseModel courseModel) {
         Course courseEntity = new Course();
 
+        courseEntity.setId(courseModel.getId());
         courseEntity.setName(courseModel.getName());
         courseEntity.setDescription(courseModel.getDescription());
         courseEntity.setPrice(courseModel.getPrice());

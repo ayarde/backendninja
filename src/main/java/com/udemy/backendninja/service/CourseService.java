@@ -13,4 +13,6 @@ public interface CourseService {
     public int removeCourse(int id);
 
     public Course updateCourse(Course course);
+
+    public Course findById(int id);
 }

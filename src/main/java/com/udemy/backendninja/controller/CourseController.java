@@ -48,15 +48,12 @@ public class CourseController {
         return "redirect:/courses/listcourses";
     }
 
-    @GetMapping("/editcourse/{course}")
-    public ModelAndView editCourse(@PathVariable("course") Course course){
-        LOGGER.info("Call: " + "editcourse" + " -- Param: " + course.toString());
+    @GetMapping("/editcourse/{id}")
+    public ModelAndView editCourse(@PathVariable("id") int id) {
+        LOGGER.info("Call: " + "editcourse" + " -- Param: " + id);
+        Course course = courseService.findById(id);
         ModelAndView modelAndView = new ModelAndView(COURSE_EDIT_VIEW);
-        modelAndView.addObject("id",course.getId());
-        modelAndView.addObject("name",course.getName());
-        modelAndView.addObject("description",course.getDescription());
-        modelAndView.addObject("price",course.getPrice());
-        modelAndView.addObject("hours",course.getHours());
+        modelAndView.addObject("course", course);
         return modelAndView;
     }
 
